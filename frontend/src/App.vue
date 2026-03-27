@@ -1,55 +1,64 @@
 <template>
   <div id="app">
-    <Login v-if="view === 'login'" @switch="view = $event" @login-success="handleLoginSuccess" />
+    <Login
+      v-if="view === 'login'"
+      @switch="view = $event"
+      @login-success="handleLoginSuccess"
+    />
     <Register v-else-if="view === 'register'" @switch="view = $event" />
     <div v-else-if="view === 'dashboard'" class="p-10 text-center">
       <h1 class="text-3xl font-bold mb-4">Welcome to Al-Turath Dashboard</h1>
       <p class="mb-6">Hello, {{ user.full_name }}!</p>
-      <button @click="logout" class="px-6 py-2 bg-primary text-background-dark font-bold rounded-lg">Logout</button>
+      <button
+        @click="logout"
+        class="px-6 py-2 bg-primary text-background-dark font-bold rounded-lg"
+      >
+        Logout
+      </button>
     </div>
   </div>
 </template>
 
 <script>
-import Login from './components/Login.vue'
-import Register from './components/Register.vue'
+import Login from "./components/Login.vue";
+import Register from "./components/Register.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     Login,
-    Register
+    Register,
   },
   data() {
     return {
-      view: 'login',
-      user: JSON.parse(localStorage.getItem('user')) || null
-    }
+      view: "login",
+      user: JSON.parse(localStorage.getItem("user")) || null,
+    };
   },
   created() {
     if (this.user) {
-      this.view = 'dashboard';
+      this.view = "dashboard";
     }
   },
   methods: {
     handleLoginSuccess(data) {
       this.user = data.user;
-      this.view = 'dashboard';
+      this.view = "dashboard";
     },
     logout() {
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
       this.user = null;
-      this.view = 'login';
-    }
-  }
-}
+      this.view = "login";
+    },
+  },
+};
 </script>
 
 <style>
 /* Add Material Icons font if not already available */
-@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap');
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap");
 
 :root {
   --primary: #eebd2b;
