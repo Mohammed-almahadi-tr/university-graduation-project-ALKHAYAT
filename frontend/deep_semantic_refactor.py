@@ -380,7 +380,7 @@ def main():
 
     print('Done! Summary:')
     for combo, info in sorted(combo_info.items(), key=lambda x: x[1]['name']):
-        print(f"  .{info['name']:50s}  ← {' '.join(combo)[:80]}")
+        print(f"  .{info['name']:50s}  <-- {' '.join(combo)[:80]}")
 
 
 if __name__ == '__main__':
